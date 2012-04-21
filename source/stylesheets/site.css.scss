@@ -1,2 +1,91 @@
 @import "compass";
-@import "styleguide";
+@import "stitch";
+
+// Variables
+// ---------------------------------------------
+
+$red: #cf4f40;
+$grey: #242423;
+$dark-grey: #1e1e1e;
+$text: #4c4c4c;
+$text-light: #616161;
+$text-dark: #000000;
+$text-inversed: white;
+$grid-baseline:24px;
+$grid-text-size:18px;
+
+// Globals
+// ---------------------------------------------
+
+body {
+	@extend .bg-1;
+	font-size:$grid-text-size;
+	line-height:$grid-baseline;
+	color:$text;
+	font-family: "ff-enzo-web",sans-serif;
+}
+
+// Backgrounds
+// ---------------------------------------------
+
+.bg-1 {
+	background:image-url('bg/black_thread.png') $dark-grey;
+}
+
+.bg-2 {
+	background:$grey;
+}
+
+.bg-3 {
+	background:image-url('bg/red_cloth.png') $red;
+}
+
+.bg-4 {
+
+}
+
+// Titles
+// ---------------------------------------------
+
+.title-1 {
+	font-size:46px;
+	line-height:56px;
+	&.inversed {
+		color:$text-inversed;
+		text-shadow: 0 1px 0 #000;
+	}
+}
+
+.title-2 {
+	font-weight:bold;
+	font-size:18px;
+	line-height:24px;
+}
+
+.title-3 {
+
+}
+
+// Panels
+// ---------------------------------------------
+
+.panel-1 {
+	
+}
+
+.panel-2 {
+	@extend .bg-2;
+	padding:($grid-baseline * 2) 0 ($grid-baseline * 3) 0;
+}
+
+.panel-3 {
+	@extend .bg-3;
+}
+
+.panel-4 {
+	background:white;
+}
+
+.panel-5 {
+	@extend .panel-1;
+}
