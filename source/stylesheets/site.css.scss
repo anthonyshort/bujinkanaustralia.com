@@ -40,16 +40,16 @@ $grid-columns: 12;
 	float:left;
 }
 
-.column-last {
-	margin-right:0;
-}
-
 @for $i from 1 through $grid-columns {
 	.span#{$i} {
 		@extend .column;
 		width: grid-columns($i);
 		margin-right:$grid-gutter-width;		
 	}
+}
+
+.column-last {
+	margin-right:0;
 }
 
 // Globals

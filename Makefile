@@ -5,4 +5,4 @@ server:
 	@@bundle exec middleman
 
 deploy:
-	make compile && git push heroku master
+	make compile && git push heroku master && git push origin master
