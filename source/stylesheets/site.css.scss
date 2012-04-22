@@ -10,19 +10,107 @@ $dark-grey: #1e1e1e;
 $text: #4c4c4c;
 $text-light: #616161;
 $text-dark: #000000;
-$text-inversed: white;
+$text-inversed: #d2d2d2;
 $grid-baseline:24px;
 $grid-text-size:18px;
+$grid-column-width:50px;
+$grid-gutter-width:25px;
+$grid-columns: 12;
+
+@function grid-columns($n){
+	@return ($n * ($grid-column-width + $grid-gutter-width)) - $grid-gutter-width;
+}
+
+@function baseline($n){
+	@return $n * $grid-baseline;
+}
+
+.container {
+	@include clear-floats;
+	width: grid-columns($grid-columns);
+	margin:0 auto;
+}
+
+.row {
+	@include clear-floats;
+	margin-left:$grid-gutter-width * -1;
+}
+
+.column {
+	float:left;
+}
+
+.column-last {
+	margin-right:0;
+}
+
+@for $i from 1 through $grid-columns {
+	.span#{$i} {
+		@extend .column;
+		width: grid-columns($i);
+		margin-right:$grid-gutter-width;		
+	}
+}
 
 // Globals
 // ---------------------------------------------
 
 body {
 	@extend .bg-1;
+	@extend .enzo-medium;
+	font-family: "ff-enzo-web",sans-serif;
 	font-size:$grid-text-size;
 	line-height:$grid-baseline;
 	color:$text;
-	font-family: "ff-enzo-web",sans-serif;
+	border-top:3px solid $red;
+}
+
+body > header {
+	border-top:1px solid #313131;
+	margin-top:6px;
+}
+
+body > footer {
+	text-align:center;
+	padding: baseline(2) 0;
+}
+
+// Misc
+// ---------------------------------------------
+
+// .locations {
+// 	margin-top: baseline(-2);
+// }
+
+// Copy
+// ---------------------------------------------
+
+.copy {
+	p {
+		-webkit-font-smoothing: antialiased;
+		margin:0 0 $grid-baseline 0;
+		&:last-child {
+			margin:0;
+		}
+	}
+	strong {
+		font-weight:bold;
+	}
+}
+
+// Fonts
+// ---------------------------------------------
+
+.enzo-light {
+	font-weight:300;
+}
+
+.enzo-medium {
+	font-weight:600;
+}
+
+.enzo-bold {
+	font-weight:700;
 }
 
 // Backgrounds
@@ -47,23 +135,86 @@ body {
 // Titles
 // ---------------------------------------------
 
+.title-logo {
+	@extend .enzo-light;
+	background: image-url('bg/logo.png') center baseline(2) no-repeat;
+	font-size:24px;
+	text-transform:uppercase;
+	color:$text-inversed;
+	letter-spacing:5px;
+	text-align:center;
+	padding-top: $grid-baseline * 6;
+	padding-bottom: $grid-baseline * 3;
+	position:relative;
+	text-shadow: 0 2px 0 #000;
+
+	&:before,
+	&:after {
+		display:block;
+		height:1px;
+		background:#4c4c4c;
+		content:'';
+		width:180px;
+		position:absolute;
+		bottom:82px;
+		left:0;
+	}
+
+	&:after {
+		right:0;
+		left:auto;
+	}
+}
+
+.title-base {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
 .title-1 {
+	@extend .title-base;
+	@extend .enzo-light;
 	font-size:46px;
 	line-height:56px;
+	color:$dark-grey;
+	margin:0 0 baseline(1);
 	&.inversed {
 		color:$text-inversed;
-		text-shadow: 0 1px 0 #000;
+		text-shadow: 0 2px 0 #000;
 	}
 }
 
 .title-2 {
+	@extend .title-base;
 	font-weight:bold;
 	font-size:18px;
 	line-height:24px;
+	margin:0 0 0;
+}
+
+.title-3 {
+	@extend .title-base;
+	@extend .enzo-light;
+	color:$text-inversed;
+	font-size:24px;
+	margin:0 0 baseline(1) 0;
 }
 
 .title-3 {
 
+}
+
+// Text
+// ---------------------------------------------
+
+.text-intro {
+	font-size:27px;
+	line-height:34px;
+	color:$dark-grey;
+}
+
+.text-1 {
+	font-size:15px;
 }
 
 // Panels
@@ -75,17 +226,65 @@ body {
 
 .panel-2 {
 	@extend .bg-2;
-	padding:($grid-baseline * 2) 0 ($grid-baseline * 3) 0;
+	padding:($grid-baseline * 2.5) 0 ($grid-baseline * 2) 0;
 }
 
 .panel-3 {
 	@extend .bg-3;
+	color:$text-inversed;
+	padding-top:baseline(2);
+	padding-bottom: baseline(2);
 }
 
 .panel-4 {
 	background:white;
+	padding: ($grid-baseline * 3.5) 0 ($grid-baseline * 4);
+	header {
+		text-align:center;
+	}
+	.container {
+		width:grid-columns(8);
+	}
 }
 
 .panel-5 {
 	@extend .panel-1;
+}
+
+
+// Figures
+// ---------------------------------------------
+
+.figure-1 {
+	font-size:16px;
+	.figure-container {
+		height:200px;
+		overflow:hidden;
+		margin-bottom:$grid-baseline;
+		border:5px solid rgba(0,0,0,0.2);
+		position:relative;
+		display:block;
+
+		&:hover:before {
+			display:block;
+		}
+
+		&:before {
+			@extend .bg-1;
+			position:absolute;
+			top:0;
+			right:0;
+			left:0;
+			bottom:0;
+			content:'Get Directions';
+			display:block;
+			line-height:200px;
+			text-align:center;
+			font-size:24px;
+			display:none;
+		}
+	}
+	p {
+		margin:0;
+	}
 }
